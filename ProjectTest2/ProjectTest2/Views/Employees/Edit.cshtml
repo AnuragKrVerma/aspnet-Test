@@ -1,0 +1,103 @@
+﻿@model EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<h1>Edit Employee</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Employee.Id"/>
+            <input type="hidden" asp-for="Employee.CreatedAt"/>
+
+            <div class="form-group mb-3">
+                <label asp-for="Employee.Name" class="control-label"></label>
+                <input asp-for="Employee.Name" class="form-control"/>
+                <span asp-validation-for="Employee.Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Employee.Email" class="control-label"></label>
+                <input asp-for="Employee.Email" class="form-control"/>
+                <span asp-validation-for="Employee.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Employee.PhoneNumber" class="control-label"></label>
+                <input asp-for="Employee.PhoneNumber" class="form-control"/>
+                <span asp-validation-for="Employee.PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Employee.PositionId" class="control-label">Position</label>
+                <select asp-for="Employee.PositionId" class="form-control" asp-items="Model.PositionOptions"></select>
+                <span asp-validation-for="Employee.PositionId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label">Languages</label>
+                <div class="checkbox-group">
+                    @for (int i = 0; i < Model.AvailableLanguages.Count; i++)
+                    {
+                        <div class="form-check">
+                            <input type="checkbox" name="SelectedLanguages" id="language_@i" value="@Model.AvailableLanguages[i].Value" class="form-check-input"
+                                   @(Model.SelectedLanguages?.Contains(Model.AvailableLanguages[i].Value) == true ? "checked" : "")/>
+                            <label class="form-check-label" for="language_@i">@Model.AvailableLanguages[i].Text</label>
+                        </div>
+                    }
+                </div>
+                <div class="text-danger" id="languageValidation" style="display: none;">Please select at least one language</div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label">Gender</label>
+                @foreach (var gender in Model.GenderOptions)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input"
+                               type="radio"
+                               asp-for="Employee.GenderId"
+                               id="gender_@gender.Value"
+                               value="@gender.Value"
+                               checked="@(Model.Employee.GenderId.ToString() == gender.Value ? "checked" : null)"/>
+                        <label class="form-check-label" for="gender_@gender.Value">@gender.Text</label>
+                    </div>
+                }
+                <span asp-validation-for="Employee.GenderId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label">Created At</label>
+                <input class="form-control" value="@Model.Employee.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")" readonly/>
+            </div>
+
+            <div class="form-group mt-4">
+                <input type="submit" value="Save" class="btn btn-primary"/>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function() {
+            $('form').submit(function(e) {
+                var checked = $('input[name="SelectedLanguages"]:checked').length;
+                if (!checked) {
+                    $('#languageValidation').show();
+                    e.preventDefault();
+                } else {
+                    $('#languageValidation').hide();
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Employee CRUD System</h1>
+    <p>Manage your employees with our simple CRUD application.</p>
+
+    <div class="mt-4">
+        <a asp-controller="Employees" asp-action="Index" class="btn btn-primary btn-lg">View Employees</a>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                Create
+            </div>
+            <div class="card-body">
+                <p>Add new employees to your database with our easy-to-use form.</p>
+                <a asp-controller="Employees" asp-action="Create" class="btn btn-outline-success">Create Employee</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                Manage
+            </div>
+            <div class="card-body">
+                <p>View and edit employee details including positions, languages, and gender.</p>
+                <a asp-controller="Employees" asp-action="Index" class="btn btn-outline-info">Manage Employees</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                Reports
+            </div>
+            <div class="card-body">
+                <p>View a comprehensive list of all employees in your organization.</p>
+                <a asp-controller="Employees" asp-action="Index" class="btn btn-outline-warning">View Reports</a>
+            </div>
+        </div>
+    </div>
+</div>

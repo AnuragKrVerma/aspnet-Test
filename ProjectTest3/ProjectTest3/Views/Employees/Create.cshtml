@@ -1,0 +1,77 @@
+﻿@model EmployeeDto
+
+@{
+    ViewData["Title"] = "Create Employee";
+}
+
+<h1>Create Employee</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PositionId" class="control-label"></label>
+                <select asp-for="PositionId" asp-items="Model.PositionOptions" class="form-control">
+                    <option value="">-- Select Position --</option>
+                </select>
+                <span asp-validation-for="PositionId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="GenderId" class="control-label"></label>
+                @foreach (var item in Model.GenderOptions)
+                {
+                        <div class="form-check">
+                            <input type="radio" name="GenderId" id="gender_@item.Value" value="@item.Value" class="form-check-input" />
+                            <label class="form-check-label" for="gender_@item.Value">@item.Text</label>
+                        </div>
+                }
+                <span asp-validation-for="GenderId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SelectedLanguageIds" class="control-label"></label>
+                <div class="row">
+                    @foreach (var item in Model.LanguageOptions)
+                    {
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input type="checkbox" name="SelectedLanguageIds" id="lang_@item.Value" value="@item.Value" class="form-check-input" />
+                                    <label class="form-check-label" for="lang_@item.Value">@item.Text</label>
+                                </div>
+                            </div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
