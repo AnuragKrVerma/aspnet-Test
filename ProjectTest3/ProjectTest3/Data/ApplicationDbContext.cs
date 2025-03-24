@@ -100,16 +100,16 @@ namespace ProjectTest3.Data
 
             // Seed data for EmployeeLanguages (many-to-many)
             modelBuilder.Entity<EmployeeLanguage>().HasData(
-                // John Doe knows C#, JavaScript, and TypeScript
+                // ABC knows C#, JavaScript, and TypeScript
                 new EmployeeLanguage { EmployeeId = 1, LanguageId = 1 },
                 new EmployeeLanguage { EmployeeId = 1, LanguageId = 4 },
                 new EmployeeLanguage { EmployeeId = 1, LanguageId = 5 },
 
-                // Jane Smith knows JavaScript and Python
+                // DEF knows JavaScript and Python
                 new EmployeeLanguage { EmployeeId = 2, LanguageId = 4 },
                 new EmployeeLanguage { EmployeeId = 2, LanguageId = 3 },
 
-                // Alex Johnson knows Java and C#
+                // HIJ knows Java and C#
                 new EmployeeLanguage { EmployeeId = 3, LanguageId = 2 },
                 new EmployeeLanguage { EmployeeId = 3, LanguageId = 1 }
             );

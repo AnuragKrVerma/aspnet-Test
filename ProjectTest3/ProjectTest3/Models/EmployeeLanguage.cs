@@ -1,6 +1,6 @@
 ﻿namespace ProjectTest3.Models
 {
-    // Junction table for many-to-many relationship between Employee and Language
+    // table for many-to-many relationship between Employee and Language
     public class EmployeeLanguage
     {
         public int EmployeeId { get; set; }

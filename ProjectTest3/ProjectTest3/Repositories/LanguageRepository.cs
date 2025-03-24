@@ -2,9 +2,6 @@
 using ProjectTest3.Data;
 using ProjectTest3.Models;
 using ProjectTest3.Repositories.Interface;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjectTest3.Repositories
 {
