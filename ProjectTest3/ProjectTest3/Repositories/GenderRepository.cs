@@ -20,9 +20,9 @@ namespace ProjectTest3.Repositories
             return await _context.Genders.ToListAsync();
         }
 
-        public async Task<Gender> GetGenderByIdAsync(int id)
-        {
-            return await _context.Genders.FindAsync(id);
-        }
+        //public async Task<Gender> GetGenderByIdAsync(int id)
+        //{
+        //    return await _context.Genders.FindAsync(id);
+        //}
     }
 }

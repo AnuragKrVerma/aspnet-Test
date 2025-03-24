@@ -19,17 +19,17 @@ namespace ProjectTest3.Repositories
             return await _context.Languages.ToListAsync();
         }
 
-        public async Task<Language> GetLanguageByIdAsync(int id)
-        {
-            return await _context.Languages.FindAsync(id);
-        }
+        //public async Task<Language> GetLanguageByIdAsync(int id)
+        //{
+        //    return await _context.Languages.FindAsync(id);
+        //}
 
-        public async Task<IEnumerable<Language>> GetLanguagesForEmployeeAsync(int employeeId)
-        {
-            return await _context.EmployeeLanguages
-                .Where(el => el.EmployeeId == employeeId)
-                .Select(el => el.Language)
-                .ToListAsync();
-        }
+        //public async Task<IEnumerable<Language>> GetLanguagesForEmployeeAsync(int employeeId)
+        //{
+        //    return await _context.EmployeeLanguages
+        //        .Where(el => el.EmployeeId == employeeId)
+        //        .Select(el => el.Language)
+        //        .ToListAsync();
+        //}
     }
 }

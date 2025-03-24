@@ -15,7 +15,11 @@ namespace ProjectTest3.Controllers
         private readonly ILanguageRepository _languageRepository;
         private readonly ILogger<EmployeesController> _logger;
 
-        public EmployeesController(IEmployeeRepository employeeRepository, IGenderRepository genderRepository, IPositionRepository positionRepository, ILanguageRepository languageRepository, ILogger<EmployeesController> logger)
+        public EmployeesController(IEmployeeRepository employeeRepository, 
+            IGenderRepository genderRepository, 
+            IPositionRepository positionRepository, 
+            ILanguageRepository languageRepository, ILogger<EmployeesController> logger)
+
         {
             _employeeRepository = employeeRepository;
             _genderRepository = genderRepository;
@@ -42,7 +46,7 @@ namespace ProjectTest3.Controllers
                 LanguageNames = e.EmployeeLanguages.Select(el => el.Language.Name).ToList()
             }).ToList();
 
-            _logger.LogInformation($"Employee list retrieved successfully => {employeeDto.ToString()}");
+            _logger.LogInformation($"Employee list retrieved successfully ");
 
 
             return View(employeeDto);
@@ -52,7 +56,7 @@ namespace ProjectTest3.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var employee = await _employeeRepository.GetEmployeeWithDetailsAsync(id); 
-
+            _logger.LogInformation($"Employee id => {id} Update");
             if (employee == null)
             {
                 return NotFound();
@@ -71,7 +75,7 @@ namespace ProjectTest3.Controllers
                 LanguageNames = employee.EmployeeLanguages.Select(el => el.Language.Name).ToList()
             };
 
-            _logger.LogInformation($"Employee details retrieved successfully => {employeeDto.ToString()}");
+            _logger.LogInformation($"Employee details retrieved successfully");
 
             return View(employeeDto);
         }
@@ -104,7 +108,7 @@ namespace ProjectTest3.Controllers
                 await _employeeRepository.AddEmployeeAsync(employee);
                 await _employeeRepository.SaveAsync();
 
-                // Now that we have the employee ID, we can add the language associations
+                // employee ID, -> add the language associations
                 if (employeeDto.SelectedLanguageIds != null && employeeDto.SelectedLanguageIds.Any())
                 {
                     await _employeeRepository.UpdateEmployeeLanguagesAsync(employee.Id, employeeDto.SelectedLanguageIds);
@@ -118,7 +122,7 @@ namespace ProjectTest3.Controllers
             return View(employeeDto);
         }
 
-        // GET: Employees/Edit/{5}
+        // GET: Employees/Edit/{id}
         public async Task<IActionResult> Edit(int id)
         {
             var employee = await _employeeRepository.GetEmployeeWithDetailsAsync(id);
@@ -176,18 +180,19 @@ namespace ProjectTest3.Controllers
                     await _employeeRepository.UpdateEmployeeLanguagesAsync(id, employeeDto.SelectedLanguageIds);
 
                     await _employeeRepository.SaveAsync();
-                    _logger.LogInformation($"Employee updated successfully => {employee.ToString()}");
+                    _logger.LogInformation($"Employee updated successfully ");
                     return RedirectToAction(nameof(Index));
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     if (!await _employeeRepository.EmployeeExistsAsync(id))
                     {
+                        _logger.LogInformation($"No Record Found");
                         return NotFound();
                     }
                     else
                     {
-                        throw;
+                        _logger.LogInformation($"{e.Message}");
                     }
                 }
             }
@@ -220,7 +225,7 @@ namespace ProjectTest3.Controllers
             return View(employeeDto);
         }
 
-        // POST: Employees/Delete/5
+        // POST: Employees/Delete/{id}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

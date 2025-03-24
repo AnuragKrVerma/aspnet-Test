@@ -5,6 +5,6 @@ namespace ProjectTest3.Repositories.Interface
     public interface IPositionRepository
     {
         Task<IEnumerable<Position>> GetAllPositionsAsync();
-        Task<Position> GetPositionByIdAsync(int id);
+        //Task<Position> GetPositionByIdAsync(int id);
     }
 }

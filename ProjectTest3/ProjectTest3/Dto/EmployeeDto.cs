@@ -32,11 +32,17 @@ namespace ProjectTest3.Dto
         [Display(Name = "Programming Languages")]
         public List<int> SelectedLanguageIds { get; set; }
 
-        // For dropdown lists and display in the view
+        // For radio buttons 
+        
         [ValidateNever]
         public SelectList GenderOptions { get; set; }
+
+        // For dropdown lists 
+        
         [ValidateNever]
         public SelectList PositionOptions { get; set; }
+
+        // For checkboxes
         [ValidateNever]
         public MultiSelectList LanguageOptions { get; set; }
 

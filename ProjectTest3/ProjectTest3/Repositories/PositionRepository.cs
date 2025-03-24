@@ -20,9 +20,9 @@ namespace ProjectTest3.Repositories
             return await _context.Positions.ToListAsync();
         }
 
-        public async Task<Position> GetPositionByIdAsync(int id)
-        {
-            return await _context.Positions.FindAsync(id);
-        }
+        //public async Task<Position> GetPositionByIdAsync(int id)
+        //{
+        //    return await _context.Positions.FindAsync(id);
+        //}
     }
 }
